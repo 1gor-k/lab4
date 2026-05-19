@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  product-service-06:
+    build: ./product_service
+    container_name: product-service-06
+    ports:
+      - "8006:8000"
+    networks:
+      - lab-network-06
+
+  order-service-06:
+    build: ./order_service
+    container_name: order-service-06
+    ports:
+      - "9006:8000"
+    depends_on:
+      - product-service-06
+    networks:
+      - lab-network-06
+
+networks:
+  lab-network-06:
+    driver: bridge
